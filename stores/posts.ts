@@ -5,6 +5,7 @@ import type { PostItem } from '~/api/modules/posts/types';
 const usePostsStore = defineStore('posts', () => {
   const { $api } = useNuxtApp();
 
+  const isInitialized: Ref<boolean> = ref(false);
   const isFetching: Ref<boolean> = ref(true);
 
   const posts: Ref<Array<PostItem>> = ref([] as Array<PostItem>);
@@ -53,6 +54,7 @@ const usePostsStore = defineStore('posts', () => {
     } catch (err) {
       console.log(err);
     } finally {
+      isInitialized.value = true;
       isFetching.value = false;
     }
   };
@@ -63,6 +65,7 @@ const usePostsStore = defineStore('posts', () => {
     nextPage,
     previousPage,
     initialize,
+    isInitialized,
     isFetching,
     currentPage,
     totalPages,
@@ -72,6 +75,6 @@ const usePostsStore = defineStore('posts', () => {
 
 export const usePosts = () => {
   const postsStore = usePostsStore();
-  postsStore.initialize();
+  if (!postsStore.isInitialized) postsStore.initialize();
   return postsStore;
 }
