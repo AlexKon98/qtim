@@ -4,7 +4,7 @@ import FetchFactory from '../../factory';
 
 class PostsModule extends FetchFactory {
   async getPosts() {
-    return await this.call<Promise<Array<PostItem>>>('GET', '/posts/');
+    return await this.call<Promise<Array<PostItem>>>('GET', '/qtim-test-work/posts/');
   }
 }
 

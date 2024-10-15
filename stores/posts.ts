@@ -1,14 +1,14 @@
 import { defineStore, skipHydrate } from 'pinia';
-import { ref, type Ref, computed, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 import type { PostItem } from '~/api/modules/posts/types';
 
 const usePostsStore = defineStore('posts', () => {
   const { $api } = useNuxtApp();
 
-  const isInitialized: Ref<boolean> = ref(false);
-  const isFetching: Ref<boolean> = ref(true);
+  const isInitialized = ref<boolean>(false);
+  const isFetching = ref<boolean>(true);
 
-  const posts: Ref<Array<PostItem>> = ref([] as Array<PostItem>);
+  const posts = ref<Array<PostItem>>([]);
 
   const itemsPerPage = 8;
   const currentPage = ref(1);
